@@ -25,8 +25,8 @@
      */
     public double calculTotalProjet(double montantEmprunt){
 <span class="fc" id="L27">        return montantEmprunt +</span>
-<span class="fc" id="L28">                this.fraisDossierBancaire +</span>
-<span class="fc" id="L29">                this.fraisNotaireCredit +</span>
+                this.fraisDossierBancaire +
+                this.fraisNotaireCredit +
 <span class="fc" id="L30">                this.calculTotalInterets(montantEmprunt);</span>
     }
 
@@ -37,7 +37,7 @@
     public double calculTotalInterets(double montantEmprunt){
 <span class="fc" id="L38">        return this.calculMensualites(montantEmprunt) *</span>
 <span class="fc" id="L39">                this.getMensualites() -</span>
-<span class="fc" id="L40">                montantEmprunt;</span>
+                montantEmprunt;
     }
 
     /**
@@ -50,11 +50,11 @@
 <span class="fc" id="L50">        double tauxPeriodique = this.calculTauxPeriodique();</span>
 <span class="fc" id="L51">        int mensualites = this.getMensualites();</span>
 <span class="fc" id="L52">        return (montantEmprunt *  </span>
-<span class="fc" id="L53">                tauxPeriodique *</span>
+                tauxPeriodique *
 <span class="fc" id="L54">                Math.pow(1 + tauxPeriodique , mensualites)</span>
-<span class="fc" id="L55">            ) / (</span>
+            ) / (
 <span class="fc" id="L56">                Math.pow(1 + tauxPeriodique, mensualites) -</span>
-<span class="fc" id="L57">                1</span>
+                1
             );
     }
 

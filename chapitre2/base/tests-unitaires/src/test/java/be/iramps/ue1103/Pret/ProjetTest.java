@@ -224,11 +224,11 @@ public class ProjetTest {
 
     }// End calculTotalProjetAchat_TestPositifExtremValues() testing method
 
-    @Disabled
+    //@Disabled
     @Nested
     @DisplayName("Test calcul apport Minimal")
     class calculApportMinimal_normalPositifValues {
-        // @Disabled
+        //@Disabled
         @ParameterizedTest
         @MethodSource("getArgsNormalPositiveValueForCalculApportMinimal")
         void calculApportMinimal_testNormalPositifValues(double prixHabitation,
@@ -251,12 +251,12 @@ public class ProjetTest {
         static Stream<Arguments> getArgsNormalPositiveValueForCalculApportMinimal() {
             return Stream.of(
                     Arguments.arguments(100_000.00, 5_000.00, 15_000.00, 900.00, 3_600.00, 20_190.00),
-                    Arguments.arguments(350_000.00, 5_000.00, 15_000.00, 900.00, 18_600, 60_190.00),
-                    Arguments.arguments(450_000.00, 5_000.00, 15_000.00, 900.00, 25_400.00, 77_690.00),
-                    Arguments.arguments(500_000.00, 5_000.00, 15_000.00, 900.00, 60_000.00, 85_390.00));
+                    Arguments.arguments(350_000.00, 3_500.00, 10_500.00, 630.00, 18_600, 58_213.00),
+                    Arguments.arguments(450_000.00, 4_000.00, 25_000.00, 1500.00, 25_400.00, 77_050.00),
+                    Arguments.arguments(500_000.00, 5_500.00, 35_000.00, 2_100.00, 28_800.00, 88_010.00));
         }// getArgsNormalPositiveValueForCalculApportMinimal()
 
-        //@Disabled
+        @Disabled
         @Test
         @MethodSource("getArgsLimitsValueForCalculApportMinimal")
         void calculApportMinimal_testLimitsValues() {
