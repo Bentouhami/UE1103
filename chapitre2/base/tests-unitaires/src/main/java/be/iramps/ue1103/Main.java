@@ -9,13 +9,14 @@ public class Main {
     public static void main(String[] args) {
         // Préparation pour le projet hypothécaire
         Projet projet = new Projet();
-        projet.setPrixHabitation(100_000);
+        projet.setPrixHabitation(100_000.00);
         projet.setRevenuCadastral(700);
         projet.setFraisNotaireAchat(4_150); // Prix forfétaire pour un bien de 195.000,00 €. Varie selon le montant, bien entendu.
         projet.setFraisTransformation(60_000); 
 
-        double apportPersonnel = projet.calculApportMinimal();
-        double montantEmprunt = projet.calculResteAEmprunter();
+        double apportPersonnel = projet.calculApportMinimal(); // 24_110.00
+        double montantEmprunt = projet.calculResteAEmprunter(); // 147_240.00
+        
         
         // Résultat du projet:
         System.out.println(String.format(Locale.FRENCH,"Total projet:\t %(,11.2f EUR", projet.calculTotalProjetAchat())); 

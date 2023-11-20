@@ -1,9 +1,10 @@
 package be.iramps.ue1103.Pret;
 
+
 public class Projet {
     /*
      * Cette classe couvre l'ensemble des méthodes nécessaires au calcul d'un pret
-     * hypothecaire.
+     * hypothecaire. 
      */
     private int revenuCadastral;
     private double prixHabitation;
@@ -15,9 +16,12 @@ public class Projet {
      * 
      * @return double emprunt
      */
+    
+    
     public double calculResteAEmprunter() {
+       // total abattement = 383_230
         return this.calculTotalProjetAchat() -
-                this.calculApportMinimal();
+                this.calculApportMinimal(); 
     }
 
     /**
@@ -25,27 +29,28 @@ public class Projet {
      * 
      * @return doube apport minimal
      */
-    public double calculApportMinimal() {
+    public double calculApportMinimal() { 
         return 0.1 *
-                (this.prixHabitation +
-                        this.fraisTransformation +
-                        this.calculTVAFraisTransformation())
-                +
-                this.calculDroitEnregistrement() +
-                this.fraisNotaireAchat;
+                (this.prixHabitation + //
+                        this.fraisTransformation + // 
+                        this.calculTVAFraisTransformation()) + // 
+                this.calculDroitEnregistrement() + // 
+                this.fraisNotaireAchat; // 
+
     }
 
+    
     /**
      * Calcule le coût total du projet d'Achat
      * 
      * @return double total
      */
-    public double calculTotalProjetAchat() {
-        return this.prixHabitation +
-                this.fraisNotaireAchat +
-                this.calculDroitEnregistrement() +
-                this.fraisTransformation +
-                this.calculTVAFraisTransformation();
+    public double calculTotalProjetAchat() { //
+        return this.prixHabitation + // 
+                this.fraisNotaireAchat +  // 
+                this.calculDroitEnregistrement() +  // 
+                this.fraisTransformation + // 
+                this.calculTVAFraisTransformation(); //
     }
 
     /**
@@ -59,6 +64,7 @@ public class Projet {
             taux = 0.06f;
         }
         return (double) taux * (this.prixHabitation - this.calculAbattement());
+        //return Math.round((double) taux * (this.prixHabitation - this.calculAbattement())); // pour les tests unitaires round.
         
     }
 
@@ -81,7 +87,7 @@ public class Projet {
      * @return doube TVA
      */
     public double calculTVAFraisTransformation() {
-        return 0.06 * this.fraisTransformation;
+        return 0.06 * this.fraisTransformation;  // = 3_600 aussi
     }
 
     public int getRevenuCadastral() {

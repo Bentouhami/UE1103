@@ -49,7 +49,7 @@ public class Pret {
     public double calculMensualites(double montantEmprunt){
         double tauxPeriodique = this.calculTauxPeriodique();
         int mensualites = this.getMensualites();
-        return (montantEmprunt * 
+        return (montantEmprunt *  
                 tauxPeriodique *
                 Math.pow(1 + tauxPeriodique , mensualites)
             ) / (
