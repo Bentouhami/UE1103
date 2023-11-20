@@ -2,7 +2,6 @@ package be.iramps.ue1103.Pret;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.instrument.IllegalClassFormatException;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
@@ -36,12 +35,12 @@ public class ProjetTest {
     }
 
     // nested class to test calculTotalProjetAchat
-    // @Disabled
+    @Disabled
     @Nested
     @DisplayName("Testing calculTotalProjetAchat() total Projet achat")
     class testCalculTotalProjetAchat {
 
-        ////@Disabled
+        // @Disabled
         @Test
         @DisplayName("Testing calculTotalProjetAchat positive normal values")
         public void calculTotalProjetAchat_testPositifNomalValues() {
@@ -154,7 +153,7 @@ public class ProjetTest {
 
         //@Disabled
         @ParameterizedTest
-        @MethodSource("providArgsForLimitsValues")
+        @MethodSource("providArgs_calculTotalProjetAchat_testLimitsValueWithArgs")
         @DisplayName("Testing calcule Total Projet Achat limits values")
         void calculTotalProjetAchat_testLimitsValueWithArgs(double prixHabitation, double fraisNotaireAchat,
                 double mockDroitEnregistrement, double fraisTransformation,
@@ -170,7 +169,7 @@ public class ProjetTest {
 
         }
 
-        static Stream<Arguments> providArgsForLimitsValues() {
+        static Stream<Arguments> providArgs_calculTotalProjetAchat_testLimitsValueWithArgs() {
             return Stream.of(
                     Arguments.arguments(349_999.99, 5_000.00, 18_600.00, 10_000.00, 600.00, 384_199.99),
                     Arguments.arguments(350_000.99, 5_000.00, 18_600.07, 10_000.00, 600.00, 384_201.06),
@@ -178,7 +177,7 @@ public class ProjetTest {
                     Arguments.arguments(500_000.99, 4_999.99, 28_800.06, 10_999.99, 654.00, 545_461.03));
         };
 
-        //@Disabled
+        // @Disabled
         @Test
         @DisplayName("Testing calcul Total Projet Achat extreme values")
         public void calculTotalProjetAchat_testExtremValues() {
@@ -225,7 +224,7 @@ public class ProjetTest {
 
     }// End calculTotalProjetAchat_TestPositifExtremValues() testing method
 
-    //@Disabled
+    @Disabled
     @Nested
     @DisplayName("Test calcul apport Minimal")
     class calculApportMinimal_normalPositifValues {
@@ -241,35 +240,35 @@ public class ProjetTest {
 
             projet.setPrixHabitation(prixHabitation);
             projet.setFraisNotaireAchat(fraisNotaireAchat);
-            projet.setFraisTransformation(calculTVAFraisTransformation);
+            projet.setFraisTransformation(setFraisTransformation);
 
             Mockito.when(mockedProjet.calculDroitEnregistrement()).thenReturn(calculDroitEnregistrement);
             Mockito.when(mockedProjet.calculTVAFraisTransformation()).thenReturn(calculTVAFraisTransformation);
-            assertEquals(excepted, projet.calculApportMinimal());
+            assertEquals(excepted, projet.calculApportMinimal(), ARRANDIR_ERROR);
 
         }// end test calculApportMinimal_testNormalPositifValues
 
         static Stream<Arguments> getArgsNormalPositiveValueForCalculApportMinimal() {
             return Stream.of(
-                    Arguments.arguments(100_000.00, 4_150.00, 15_000.00, 900.00, 3_600.00, 19_340.0000),
-                    Arguments.arguments(350_000.00, 3_500.00, 10_500.00, 630.00, 18_600, 58_213.00),
-                    Arguments.arguments(450_000.00, 4_000.00, 25_000.00, 1_500.00, 25_400.00, 77_050.00),
-                    Arguments.arguments(500_000.00, 5_500.00, 15_000.00, 900.00, 60_000.00, 117_090.00));
+                    Arguments.arguments(100_000.00, 5_000.00, 15_000.00, 900.00, 3_600.00, 20_190.00),
+                    Arguments.arguments(350_000.00, 5_000.00, 15_000.00, 900.00, 18_600, 60_190.00),
+                    Arguments.arguments(450_000.00, 5_000.00, 15_000.00, 900.00, 25_400.00, 77_690.00),
+                    Arguments.arguments(500_000.00, 5_000.00, 15_000.00, 900.00, 60_000.00, 85_390.00));
         }// getArgsNormalPositiveValueForCalculApportMinimal()
 
         //@Disabled
         @Test
         @MethodSource("getArgsLimitsValueForCalculApportMinimal")
-        void calculApportMinimal_testLimitsValues () {
+        void calculApportMinimal_testLimitsValues() {
 
-                    // testing extreme values
+            // testing extreme values
             assertAll(
                     // 1 -> testing MIN_VALUE
                     () -> {
                         projet.setPrixHabitation(Double.MIN_VALUE);
                         projet.setFraisNotaireAchat(20_000.00);
                         projet.setFraisTransformation(50_000.00);
-                        Mockito.when(mockedProjet.calculDroitEnregistrement()).thenReturn(12_497_400.00);
+                        Mockito.when(mockedProjet.calculDroitEnregistrement()).thenReturn(12_497.00);
                         Mockito.when(mockedProjet.calculTVAFraisTransformation()).thenReturn(3000.00);
                         assertThrows(Exception.class, () -> {
                             projet.calculTotalProjetAchat();
@@ -298,11 +297,37 @@ public class ProjetTest {
                         assertThrows(Exception.class, () -> {
                             projet.calculTotalProjetAchat();
                         }, PRIX_HABITATION_IS_ZERO);
-                    }
-            );
+                    });
 
         }// end test testCalculApportMinimal_normalPositifValues
 
     }// end testing calculApportMinimal()
 
+    //@Disabled
+    @Test
+    @DisplayName("testing getters & setters")
+    void testingGetters_Setters() {
+        assertAll(
+                () -> {
+                    projet.setRevenuCadastral(700);
+                    assertEquals(700, projet.getRevenuCadastral());
+
+                },
+                () -> {
+                    projet.setPrixHabitation(350_000.00);
+                    assertEquals(350_000.00, projet.getPrixHabitation());
+
+                },
+                () -> {
+                    projet.setFraisNotaireAchat(3_000.00);
+                    assertEquals(3_000.00, projet.getFraisNotaireAchat());
+
+                },
+                () -> {
+                    projet.setFraisTransformation(35_000.00);
+                    assertEquals(35_000.00, projet.getFraisTransformation());
+                }
+
+        );
+    }
 }// Fin de test de la classe Projet

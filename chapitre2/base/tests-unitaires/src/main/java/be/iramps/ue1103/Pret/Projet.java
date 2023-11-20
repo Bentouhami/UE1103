@@ -19,7 +19,6 @@ public class Projet {
     
     
     public double calculResteAEmprunter() {
-       // total abattement = 383_230
         return this.calculTotalProjetAchat() -
                 this.calculApportMinimal(); 
     }
@@ -31,11 +30,11 @@ public class Projet {
      */
     public double calculApportMinimal() { 
         return 0.1 *
-                (this.prixHabitation + //
-                        this.fraisTransformation + // 
-                        this.calculTVAFraisTransformation()) + // 
-                this.calculDroitEnregistrement() + // 
-                this.fraisNotaireAchat; // 
+                (this.prixHabitation +
+                        this.fraisTransformation + 
+                        this.calculTVAFraisTransformation()) + 
+                this.calculDroitEnregistrement() + 
+                this.fraisNotaireAchat; 
 
     }
 
@@ -45,12 +44,12 @@ public class Projet {
      * 
      * @return double total
      */
-    public double calculTotalProjetAchat() { //
-        return this.prixHabitation + // 
-                this.fraisNotaireAchat +  // 
-                this.calculDroitEnregistrement() +  // 
-                this.fraisTransformation + // 
-                this.calculTVAFraisTransformation(); //
+    public double calculTotalProjetAchat() { 
+        return this.prixHabitation + 
+                this.fraisNotaireAchat +  
+                this.calculDroitEnregistrement() +  
+                this.fraisTransformation + 
+                this.calculTVAFraisTransformation();
     }
 
     /**
@@ -74,9 +73,9 @@ public class Projet {
      * @return double abattement
      */
     public double calculAbattement() {
-        if (this.prixHabitation < 350_000)
+        if (this.prixHabitation < 350_000.00)
             return 40_000;
-        if (this.prixHabitation >= 500_000)
+        if (this.prixHabitation >= 500_000.00)
             return 20_000;
         return 40_000 - (20_000 * (this.prixHabitation - 350_000) / (500_000 - 350_000));
     }
@@ -87,7 +86,7 @@ public class Projet {
      * @return doube TVA
      */
     public double calculTVAFraisTransformation() {
-        return 0.06 * this.fraisTransformation;  // = 3_600 aussi
+        return 0.06 * this.fraisTransformation; 
     }
 
     public int getRevenuCadastral() {
